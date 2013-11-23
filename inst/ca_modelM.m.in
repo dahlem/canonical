@@ -1,0 +1,38 @@
+## Copyright (C) 2008-2013 Dominik Dahlem <Dominik.Dahlem@gmail.com>
+##
+## This file is free software; as a special exception the author gives
+## unlimited permission to copy and/or distribute it, with or without
+## modifications, as long as this notice is preserved.
+##
+## This program is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+## implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+## Author: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Maintainer: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Keywords: Canonical Analysis
+## Created: 10.11.2008
+## Version: @VERSION@
+
+function X = ca_modelM(D)
+  n = rows(D);
+  nvar = columns(D);
+  X = ones(n, 1);
+
+  for i = 1:nvar
+    X = [X, D(:, i)];
+  endfor
+
+  squaresStart = 1 + nvar;
+
+  for i = 1:nvar
+    X = [X, D(:, i).^2];
+  endfor
+
+  squaresEnd = squaresStart + nvar;
+  for i = 1:(nvar-1)
+    for j = (i+1):nvar
+      X = [X, D(:, i) .* D(:, j)];
+    endfor
+  endfor
+endfunction

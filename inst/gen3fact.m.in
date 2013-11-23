@@ -1,0 +1,32 @@
+## Copyright (C) 2008-2013 Dominik Dahlem <Dominik.Dahlem@cs.tcd.ie>
+##
+## This file is free software; as a special exception the author gives
+## unlimited permission to copy and/or distribute it, with or without
+## modifications, as long as this notice is preserved.
+##
+## This program is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+## implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+## Author: Dominik Dahlem <Dominik.Dahlem@cs.tcd.ie>
+## Maintainer: Dominik Dahlem <Dominik.Dahlem@cs.tcd.ie>
+## Keywords: Canonical Analysis
+## Created: 10.11.2008
+## Version: @VERSION@
+
+function D = gen3fact(n, boundaries)
+  dim = 3^n;
+  D = zeros(dim, n);
+  for i = 1:dim
+    j = i - 1;
+    for l = 1:n
+      D(i, l) = 1 + mod(j, 3);
+      j = floor(j / 3);
+    endfor
+  endfor
+
+  ## scale to be between [0;1]
+  D = D - 1;
+  D = D./2;
+  D = repmat(boundaries(1,:), rows(D), 1) .+ D .* repmat(boundaries(2,:) - boundaries(1,:), rows(D), 1);
+endfunction

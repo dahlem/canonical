@@ -1,0 +1,83 @@
+README
+
+This package implements canonical analysis as a means to analyse the
+sensitivity of independent variables to a response variable. This
+package is an octave implementation of a self-contained package, which
+can be loaded into an octave session.
+
+INTRODUCTION
+
+
+In computer simulations with two inputs and multiple outputs, a
+geometrical representation enhances the understanding of the
+simulation outputs, especially by representing each output variable as
+a contour plot given the inputs. Plotting the contours provides visual
+feedback on the sensitivity of each design variable with respect to
+the output. In higher dimensions geometrical representations of the
+contours becomes more difficult and therefore a more mathematical
+analysis is necessary. Canonical analysis is a mathematical framework
+to achieve greater insights into the sensitivities of each design
+variable in the vicinity of stationary points. This package
+implementation is based onthe books by:
+
+"Response Surface Methodology: Process and Product Optimization Using
+Designed Experiments (Wiley Series in Probability and Statistics)", by
+Myers, Raymond H. and Montgomery, Douglas C. and Anderson-Cook,
+Christine M., 2009
+
+"Design and Analysis of Experiments", by Montgomery, Douglas C., 2004
+
+"Response Surfaces, Mixtures, and Ridge Analyses (Wiley Series in
+Probability and Statistics)", by Box, George E. P. and Draper, Norman
+R., 2007.
+
+Recall that the purpose of building a model of (stochastic) computer
+experiments is to find suitable approximations for the true functional
+relationship between the independent variables and the simulation
+output. A canonical analysis can be conducted to characterise the
+nature of the surface in the vicinity of the stationary point, where
+the stationary point represents either a point of maximum response, a
+point of minimum response, or a saddle point. This assumes that the
+stationary point is within the design domain.
+
+
+Ridge Analysis
+
+Often, in computer simulations with more than one independent variable
+it is not unusual to encounter more complex response surfaces that
+cannot be characterised as having a pure maximum, minimum or saddle
+point. Ridge systems may arise due to some interaction or underlying
+dependence among the independent variables (or even not considered
+ones). For example, yield contours for an attenuated maximum in two
+variables have a banana shape; stationary ridge systems can be
+understood as having an optimum on a line; a rising ridge system
+displays a stationary point outside the design region. In three
+dimensions these systems can easily be investigated by looking at the
+contour plots. However, as before with pure optima, with more than two
+independent variables a formal study can be of great assistance.
+
+In the most general case, a ridge analysis can be conducted over a
+specified region of interest to follow the locus (or path) of a
+maximum response. The origin of the path can be situated anywhere
+within the design region and following on the path of maximum response
+gives a trace of each independent variable. Consequently, variables of
+high sensitivity can easily be identified independent of the size of
+the design space. Usually, only the paths of steepest ascent or
+steepest descent are of interest. However, more paths are easily
+constructed. In fact, if there are k independent variables, there
+will be k eigenvalues and 2k paths. This can easily be understood
+geometrically, where each dimension can be followed towards a minimum
+response or a maximum response. This has the advantage that graphical
+output can be produced without holding any variables
+fixed. Additionally, local optima can be investigated as
+well. However, this procedure has its drawbacks as well, because the
+respective plots following a defined path are not as easily understood
+as contour plots, and the analysis depends on the use of a quadratic
+model.
+
+If the ridge analysis is conducted for a model of a real-world system,
+then it is often desirable to identify stable regimes for the
+independent variables. In an industrial setting, it is often not
+possible to operate under exact levels and consequently stable points
+are preferred over optimal points that may show erratic behaviour when
+departing from optimal settings.

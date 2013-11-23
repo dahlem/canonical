@@ -1,0 +1,42 @@
+## Copyright (C) 2008-2013 Dominik Dahlem <Dominik.Dahlem@gmail.com>
+##
+## This file is free software; as a special exception the author gives
+## unlimited permission to copy and/or distribute it, with or without
+## modifications, as long as this notice is preserved.
+##
+## This program is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+## implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+## Author: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Maintainer: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Keywords: Canonical Analysis
+## Created: 10.11.2008
+## Version: @VERSION@
+
+function ca_serialiseModel(dir, prefix, D, z, y)
+  fd = fopen([dir, "/", prefix, "-ca-model.dat"], "wt");
+
+  for i = 1:columns(D)
+    var = sprintf("x%d,", i);
+    fprintf(fd, "%s", var);
+  endfor
+  for i = 1:rows(z)
+    var = sprintf("z%d,", i);
+    fprintf(fd, "%s", var);
+  endfor
+  fprintf(fd, "y\n");
+
+  for i = 1:rows(D)
+    var = "";
+    for j = 1:columns(D)
+      var = sprintf("%s%.10f,", var, D(i, j));
+    endfor
+    for j = 1:rows(z)
+      var = sprintf("%s%.10f,", var, z(j, i));
+    endfor
+    fprintf(fd, "%s%.10f\n", var, y(i));
+  endfor
+
+  fclose(fd);
+endfunction

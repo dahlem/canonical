@@ -1,0 +1,29 @@
+## Copyright (C) 2008-2013 Dominik Dahlem <Dominik.Dahlem@gmail.com>
+##
+## This file is free software; as a special exception the author gives
+## unlimited permission to copy and/or distribute it, with or without
+## modifications, as long as this notice is preserved.
+##
+## This program is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+## implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+## Author: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Maintainer: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Keywords: Canonical Analysis
+## Created: 10.11.2008
+## Version: @VERSION@
+
+## boundaries: the boundaries of the input variables. The first row
+## represents the minimum and the 2nd row the maximum
+## meshsize: number of design points
+function D = ca_meshSobol(boundaries, meshsize)
+  nvar = columns(boundaries);
+  S = sobol(nvar, meshsize)';
+  D = zeros(meshsize, nvar);
+
+  for j=1:nvar
+    ## scale the random variable to [min, max]
+    D(:,j) = boundaries(1,j) + S(:,j) .* (boundaries(2,j) - boundaries(1,j));
+  end
+endfunction

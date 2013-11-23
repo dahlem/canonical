@@ -1,0 +1,27 @@
+## Copyright (C) 2008-2013 Dominik Dahlem <Dominik.Dahlem@gmail.com>
+##
+## This file is free software; as a special exception the author gives
+## unlimited permission to copy and/or distribute it, with or without
+## modifications, as long as this notice is preserved.
+##
+## This program is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+## implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+## Author: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Maintainer: Dominik Dahlem <Dominik.Dahlem@gmail.com>
+## Keywords: Canonical Analysis
+## Created: 10.11.2008
+## Version: @VERSION@
+
+function D = ca_mesh(boundaries, meshsize)
+  stepsize1 = (boundaries(2, 1) - boundaries(1, 1)) / meshsize;
+  stepsize2 = (boundaries(2, 2) - boundaries(1, 2)) / meshsize;
+  stepsize3 = (boundaries(2, 3) - boundaries(1, 3)) / meshsize;
+
+  [xx, yy, zz] = meshgrid(boundaries(1, 1):stepsize1:boundaries(2, 1),
+                          boundaries(1, 2):stepsize2:boundaries(2, 2),
+                          boundaries(1, 3):stepsize3:boundaries(2, 3));
+
+  D = [vec(xx), vec(yy), vec(zz)];
+endfunction
